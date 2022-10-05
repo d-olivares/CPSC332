@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: auto;
+            max-width: 500px;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        div {
+            background-color: gray;
+            padding: 30px;
+            display: inline-block;
+            width: auto;
+            font-size: xxx-large;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #fake-button {
+            /*
+                offset-x - Horizontal pixel offset of shadow
+                offset-y - Vertical pixel offset of shadow
+                blur-radius - Optional shadow blur (default is 0)
+                color - Optional shadow color (default is usually the current CSS color)
+            */
+            /* text-shadow: 5px 5px 5px blue; */
+            text-shadow: 2px 2px 5px rgb(44, 58, 253);
+
+            /*
+                inset - Optional value that draws the shadow inside the box (default is outside the box)
+                offset-x - Horizontal pixel offset of shadow
+                offset-y - Vertical pixel offset of shadow
+                blur-radius - Optional shadow blur (default is 0)
+                spread-radius - Positive value causes shadow to grow, negative values to shrink (default is 0)
+                color - Optional shadow color (default is usually the current CSS color)
+            */
+            /* box-shadow: -5px -5px 10px 0px red; */
+            box-shadow: 10px 5px 5px black;
+            /* box-shadow: -50px -20px 5px blue, 50px 20px 5px red; */
+
+            /* border-radius
+                Single value - All four corners are equally rounded
+                Two values - First value is top-left and bottom-right corners, second value is top-right 
+                    and bottom-left corners
+                Three values - First value is top-left, second is top-right and bottom-left, third is 
+                    bottom-right
+                Four values - First value is top-left, second is top-right, third is bottom-right, forth 
+                    is bottom-left
+            */
+            border-radius: 50px;
+            /* border-radius: 10px 50px; */
+            /* border-radius: 20px 50px 5px; */
+            /* border-radius: 10px 10px 10px 10px; */
+            /* border-radius: 50px 50px 120px 120px; */
+
+
+            /* border-image
+                renders an element's border using sections of an image
+            */
+            /* border: 20px solid transparent; */
+            /* border: 20px solid green; */
+            /* border-image: url("rectangle.png") 50 stretch; */
+            /* border-image-source: url("rectangle.png"); */
+            /* border-image-width: 5; */
+            /* border-image-repeat: stretch; */
+            /* border-image-slice: 100; */
+
+
+
+            /* linear-gradient 
+                creates a linear gradient that transitions from color1 to color2 when moving from the top
+                edge to the bottom edge.*/
+            /* background: linear-gradient(to right, red, blue); */
+            /* background: linear-gradient(to bottom, red, blue); */
+            /* background: linear-gradient(45deg, orange, black); */
+            /* background: repeating-linear-gradient(to left, orange, black, red 100%); */
+
+            /* Animation:
+
+            */
+            animation-name: changeSize;
+            /* animation: changeColors 5s, changeSize 2s; */
+            /* animation-name: changeColors 5s, changeSize 2s; */
+            animation-duration: 3s;
+            /* animation-delay: 3s; */
+            animation-iteration-count: infinite;
+
+
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+        }
+
+        /* transform        
+        translate(x, y)	Moves an element on the x-axis x distance and along the y-axis y distance	        
+        scale(x, y)	Increases (values > 1) or decreases (values < 1) the width and height by the x and y multiplier	
+        rotate(angle)	Rotates clockwise by angle	
+        */
+
+        #fake-button:hover {
+            /* transform: translate(0px, -10px); */
+            /* transform: scale(1.05, 1.05); */
+            /* transform: rotate(90deg); */
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+        }
+
+        #fake-button:active {
+            transform: scale(0.75);
+            background: radial-gradient(green, blue);
+            color: red;
+            /* transform: rotate(180deg); */
+            /* animation: rotate 5s; */
+            animation: rotateObject2 5ms linear 0s infinite normal both;
+        }
+
+        @keyframes changeColors {
+            /* from {
+                background-color: chocolate;
+            }
+
+            to {
+                background-color: grey;
+            } */
+
+            0% {
+                background-color: grey;
+                left: 0px;
+                top: 0px;
+            }
+
+            50% {
+                background-color: red;
+                left: 200px;
+                top: 0px;
+            }
+
+            100% {
+                background-color: grey;
+                left: 0px;
+                top: 0px;
+            }
+
+
+        }
+
+        @keyframes changeSize {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.75);
+                background-color: red;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateObject {
+            0% {
+                transform: rotate(45deg);
+            }
+
+            25% {
+                transform: rotate(90deg);
+            }
+
+            50% {
+                transform: rotate(135deg);
+            }
+
+            75% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(225deg);
+            }
+        }
+
+        @keyframes rotateObject2 {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fake-button">
+        Click!
+    </div>
+</body>
+
+</html>
