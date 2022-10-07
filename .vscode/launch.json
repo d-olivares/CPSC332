@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "c:\\Cloud Storage\\OneDrive\\Fall 2022\\CPSC 332\\Lectures\\repos\\CPSC332\\docs\\Participation\\10-4\\index.html"
+            "file": "${file}"
         }
     ]
 }
