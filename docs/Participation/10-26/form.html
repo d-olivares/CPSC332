@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+        </script>
+
+    <script>
+
+        //use ' to surround JSON strings
+        var randomJSONObject = '{"name": "Bob Smith", "qty": 1, "colors": ["red", "green", "blue"]}';
+        var resultJSON = JSON.parse(randomJSONObject);
+
+        console.log(resultJSON.colors[1]);
+        console.log(resultJSON.name);
+
+        var anotherJSONString = JSON.stringify(resultJSON);
+
+        $(document).ready(function () {
+            $("#submit-btn").click(submitForm);
+        });
+
+        $("#search").click(function () {
+
+        });
+
+        function submitForm(event) {
+            //we need preventDefault so our submit button doesn't automatically submit
+            event.preventDefault();
+
+            //     //0. get form values and build querystring
+            var $name = $("#name").val();
+            var $qty = $("#qty").val();
+            var querystring = { name: $name, qty: $qty };
+
+            //GET
+            // $.get(
+            //     "form-response.php",
+            //     querystring,
+            //     handleResponse,
+            //     "json");
+
+            //GET with AJAX -- Same thing as $.get()
+            $.ajax({
+                // url: "form-response.php", //okay
+                url: "http://localhost:9001/test/form-response.php",
+                // url: "form-response1.php", //error
+                method: "GET",
+                data: querystring,
+                dataType: "json",
+                error: handleError, //similar to .fail but depreciated since JQuery 1.8
+            })
+                .done(handleResponse)
+                .fail(handleFail);
+        };
+
+        //
+
+        function handleResponse(data) {
+            console.log(data);
+            //jQuery converts JSON into the JavaScript object data
+            // var resultJSON = JSON.parse(data);
+            var resultJSON = data;
+            var lengthString = resultJSON.length;
+            if (lengthString == undefined) {
+                console.log(resultJSON.name);
+                console.log(resultJSON.qty);
+                for (const color of resultJSON.colors) {
+                    console.log(color);
+                }
+            }
+
+            $("#response").append("JavaScript Object: <br>" + resultJSON + "<br>");
+            //if we want the JSON we have to stringify it again!
+            $("#response").append("Raw JSON: <br>" + JSON.stringify(data));
+        };
+
+        function handleFail(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.status + " (" + jqXHR.statusText + ")");
+        };
+
+        function handleError(e) {
+            console.log("error detected!" + e);
+        };
+    </script>
+</head>
+
+<body>
+    <h1>9. JQuery Form</h1>
+    <div>
+        <form>
+            <p>
+                <label for="name">Name:</label>
+                <input id="name" type="text" name="name">
+            </p>
+            <p>
+                <label for="qty">Quantity</label>
+                <select id="qty" name="qty">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </p>
+            <p>
+                <input id="submit-btn" type="submit" value="Submit Request">
+            </p>
+        </form>
+    </div>
+
+    <div>
+        <h1 id="response"></h1>
+    </div>
+</body>
+
+</html>
